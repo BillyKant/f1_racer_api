@@ -1,5 +1,6 @@
 // Listen for Form Submission from user (season, round)
 const form = document.querySelector("#form1")
+
 form.addEventListener('submit', (event) => {
     event.preventDefault()
     let season = document.querySelector("#seasonSearch")
@@ -12,25 +13,48 @@ form.addEventListener('submit', (event) => {
 // get data from the API 
 const getData = async (season, round) => {
     let response = await axios.get(`https://ergast.com/api/f1/${season}/${round}/driverStandings.json`)
-    console.log(response.data.MRData.StandingsTable.StandingsLists['0'].DriverStandings)
-    console.log(response.data.MRData.StandingsTable.StandingsLists['0'].DriverStandings[0].position)
+    return response.data.MRData.StandingsTable.StandingsLists['0'].DriverStandings
 }
 
 const loadData = async (season, round) => {
-    // todo: add clear function
-    let roundInfo = await getData(season, round)
-    let position = roundInfo.MRData.StandingsTable.StandingsLists['0'].DriverStandings[0].position
-    let first = roundInfo.MRData.StandingsTable.StandingsLists['0'].DriverStandings[0].Driver.givenName
-    let last = roundInfo.MRData.StandingsTable.StandingsLists['0'].DriverStandings[0].Driver.givenName
-    let name = `${first} ${last}`
-    let nationality = roundInfo.MRData.StandingsTable.StandingsLists['0'].DriverStandings[0].Driver.nationality
+    clearData()
+    
+    const roundInfo = await getData(season, round)
+    for ( let i = 0; i < 7; i++) {
+    let position = roundInfo[i].position
+    let first = roundInfo[i].Driver.givenName
+    let last = roundInfo[i].Driver.familyName
+    let full = `${first} ${last}`
+    let nationality = roundInfo[i].Driver.nationality
+    let sponsor = roundInfo[i].Constructors[0].name 
+    let points = roundInfo[i].points
+    createStanding(position, full, nationality, sponsor, points)}
 }
+
+const DOM_Elements = {
+    tables: '.jsData'
+}
+
+const clearData = () => document.querySelector(DOM_Elements.tables).innerHTML = ''
+
+const createStanding = (position, fullName, nationality, sponsor, points) => {
+    const html = `<tr><th>${position}</th><th>${fullName}</th><th>${nationality}</th><th>${sponsor}</th><th>${points}</th></th>`
+    document.querySelector(DOM_Elements.tables).insertAdjacentHTML('beforeend',html)
+}
+
+const loadDataTest = async () => {
+    clear
+    const roundInfo = await getDataTest()
+    let position = roundInfo
+}
+
 
 
 const getDataTest = async () => {
     let response = await axios.get(`https://ergast.com/api/f1/2020/1/driverStandings.json`)
     console.log(response.data)
-    console.log(response)
+    console.log(response.data.MRData.StandingsTable.StandingsLists['0'].DriverStandings)
+    return response.data.MRData.StandingsTable.StandingsLists['0'].DriverStandings
     // // Position
     // console.log(response.data.MRData.StandingsTable.StandingsLists['0'].DriverStandings[0].position)
     // // First Name
@@ -45,15 +69,8 @@ const getDataTest = async () => {
     // console.log(response.data.MRData.StandingsTable.StandingsLists['0'].DriverStandings[0].points)
 }
 
-const loadDataTest = async () => {
-    const roundInfo = await getDataTest();
-    console.log(roundInfo.data);
-    console.log('test');
-}
 
-const DOM_Elements = {
-    widget: '#test'
-}
+
 
 const htmlTest = (test) => {
     const html =`<p>${test}</p>`

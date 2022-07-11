@@ -11,56 +11,39 @@
 <link rel="stylesheet" href="/main/main.css">
 <script src="js/main.js" defer></script>
 
-<title>F1 Race Standings Search</title>
-</head>
-<body>
-    <h1>Test 1</h1>
-    <form action="" id="form1">
-        <div class="input-group rounded mb-3">
-        
-            <input type="search" class="form-control rounded" placeholder="Season" aria-label="Search" aria-describedby="search-addon" id="seasonSearch" />
-            <input type="search" class="form-control rounded" placeholder="Round" aria-label="Search" aria-describedby="search-addon" id="roundSearch" />
-            <button class="btn btn-primary" type="submit">Submit</button>
-        
+
+    <title class="text-center">F1 Race Standings Search</title>
+    </head>
+    <body>
+        <h1 >F1 Race Standings Search</h1>
+        <form action="" id="form1">
+            <div class="input-group rounded mb-3">
+            
+                <input type="search" class="form-control rounded" placeholder="Season" aria-label="Search" aria-describedby="search-addon" id="seasonSearch" />
+                <input type="search" class="form-control rounded" placeholder="Round" aria-label="Search" aria-describedby="search-addon" id="roundSearch" />
+                <button class="btn btn-primary" type="submit">Get Standings</button>
+            
+            </div>
+        </form>
+
+        <div class="container">
+                    
+            <table class="table table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th>Position</th>
+                        <th>Name</th>
+                        <th>Nationality</th>
+                        <th>Sponsor</th>
+                        <th>Points</th>
+                    </tr>
+                </thead>
+                <tbody class="jsData">
+                    
+                </tbody>
+            </table>
         </div>
-    </form>
 
-    <div class="container">
-        <h2>Basic Table</h2>
-        <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>            
-        <table class="table table-striped table-dark">
-            <thead>
-                <tr>
-                    <th>Position</th>
-                    <th>Name</th>
-                    <th>Nationality</th>
-                    <th>Sponsor</th>
-                    <th>Points</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                </tr>
-                <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                </tr>
-                <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <section id="test">
-
-    </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>

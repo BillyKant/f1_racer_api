@@ -1,0 +1,6 @@
+body {
+    background-image: url(/static/background-1.png);
+    background-size: 100%;
+    position: relative;
+    color: antiquewhite;
+}
